@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>水母時鐘</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tiny5&display=swap" rel="stylesheet">
+    <style>
+        body{
+            background: url(./bg-us.jpg)center/cover;
+        }
+        #clock {
+            width: 800px;
+            height: 800px;
+            background:url(./水母時鐘本體.png);
+            margin: auto;
+            /* border-radius: 50%; */
+            position: relative;
+            top:100px;
+        }
+
+        #hour {
+            width: 20%;
+            height: 10px;
+            background:url(./觸手指針.png)no-repeat center center;
+            background-size: 100% 100%;
+            position: absolute;
+            left: 30%;
+            top: calc(50% - 5px);
+            /*指針真實中間 因為指針本體為10px 會造成像素位移所以要扣除 10px/2=5px */
+            /* border-radius: 5px; */
+            transform-origin: right center;
+        }
+
+        #minute {
+            width: 40%;
+            height: 10px;
+            /* background-color: greenyellow; */
+            background:url(./海草分針.png)no-repeat center center;
+            background-size: 100% 100%;
+            position: absolute;
+            left: 10%;
+            top: calc(50% - 5px);
+            border-radius: 5px;
+            transform-origin: right center;
+
+        }
+
+        #second {
+            width:45%;
+            height: 4px;
+            /* background-color: purple; */
+            background:url(./魚叉秒針.png)no-repeat center center;
+            background-size:100% 100%;
+            position: absolute;
+            left: 5%;
+            top: calc(50% - 2px);
+            /* border-radius: 5px; */
+            transform-origin: right center;
+
+        }
+        .container{
+            /* background-color: blue; */
+            text-align: center;
+            position: relative;
+            top: 100px;
+        }
+
+        #text{
+            color:skyblue;
+            font-size: 5rem;
+            font-family: "Tiny5", sans-serif;
+            font-weight: 400;
+            font-style: normal;
+        }
+
+        .left{
+            background: url(./水母\ 暈.png)no-repeat;
+            background-size:100% 100%;
+            /* background: #000; */
+            width: 100px;
+            height: 100px;
+            float: left; 
+            position: relative;
+            left:100px;
+            top: -500px;
+        }
+
+        .right{
+            background: url(./水母\ 萌.png)no-repeat;
+            background-size:100% 100%;
+            /* background: #000; */
+            width: 100px;
+            height: 100px;
+            float: right; 
+            position: relative;
+            right:100px;
+            top: -700px;
+        }
+     
+    </style>
+</head>
+
+<body>
+    <div id="clock">
+        <div id="hour"></div>
+        <div id="minute"></div>
+        <div id="second"></div>
+
+    </div>
+    <div class="container">
+        <p id="text">00:00:00</p>
+        <div class="left"></div>
+        <div class="right"></div>
+    </div>
+
+    <script>
+        const elHour = document.getElementById('hour')
+        const elMinute = document.getElementById('minute')
+        const elSecond = document.getElementById('second')
+        const elText = document.getElementById('text')
+
+        const clock = () => {
+            const date = new Date();
+            const hour = date.getHours();
+            const minute = date.getMinutes();
+            const second = date.getSeconds();
+            elHour.style.transform = `rotate(${hour * 30 + 90}deg)`
+            elMinute.style.transform = `rotate(${minute * 6 + 90}deg)`
+            elSecond.style.transform = `rotate(${second * 6 + 90}deg)`
+            elText.innerText = `${hour.toString().padStart(2, '0')}:${minute.toString().padStart(2, '0')}:${second.toString().padStart(2, '0')}`
+        }
+
+        setInterval(clock, 1000)
+        clock()
+    </script>
+</body>
+
+</html>
