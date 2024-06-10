@@ -100,6 +100,29 @@
             right:100px;
             top: -700px;
         }
+
+    /* 生成泡泡 */
+        .bubble {
+            position: absolute;
+            top: 0;
+            background-color: rgba(173, 216, 230, 0.7);
+            border-radius: 50%;
+            opacity: 0.6;
+            animation: floatDown linear infinite;
+        }
+
+    /*泡泡由下往上跑*/
+        @keyframes floatDown {
+            0% {
+                transform: translateY(100vh);
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+        }
      
     </style>
 </head>
@@ -116,6 +139,9 @@
         <div class="left"></div>
         <div class="right"></div>
     </div>
+
+    <!-- 泡泡內容 -->
+    <div id="bubbles"></div>
 
     <script>
         const elHour = document.getElementById('hour')
@@ -136,6 +162,30 @@
 
         setInterval(clock, 1000)
         clock()
+
+       // JS 泡泡效果
+       const bubblesContainer = document.getElementById('bubbles');
+
+        function createBubble() {
+        const bubble = document.createElement('div');
+        bubble.classList.add('bubble');
+
+        const size = Math.random() * 60 + 20 + 'px';
+        bubble.style.width = size;
+        bubble.style.height = size;
+
+        bubble.style.left = Math.random() * 100 + '%';
+        bubble.style.animationDuration = Math.random() * 5 + 3 + 's';
+        bubble.style.animationTimingFunction = 'cubic-bezier(0.25, 0.1, 0.25, 1)';
+
+        bubblesContainer.appendChild(bubble);
+
+        setTimeout(() => {
+        bubble.remove();
+        }, parseFloat(bubble.style.animationDuration) * 1000);
+    }
+
+    setInterval(createBubble, 500);
     </script>
 </body>
 
