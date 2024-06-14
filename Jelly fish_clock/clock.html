@@ -87,7 +87,20 @@
             position: relative;
             left:100px;
             top: -500px;
+            animation: upDown 3s infinite;
         }
+
+        @keyframes upDown {
+    0% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(20px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
 
         .right{
             background: url(./水母\ 萌.png)no-repeat;
@@ -99,6 +112,7 @@
             position: relative;
             right:100px;
             top: -700px;
+            animation: upDown 3s infinite;
         }
 
     /* 生成泡泡 */
